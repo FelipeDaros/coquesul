@@ -53,6 +53,24 @@ export function Home() {
       titulo: 'FEFEFEFEFFE TRANSPORTE BIFE',
       email: 'felipe-daros2@hotmail.com',
       status: 'SUCCESS'
+    },
+    {
+      id: 8,
+      titulo: 'FEFEFEFEFFE TRANSPORTE BIFE',
+      email: 'felipe-daros2@hotmail.com',
+      status: 'SUCCESS'
+    },
+    {
+      id: 9,
+      titulo: 'FEFEFEFEFFE TRANSPORTE BIFE',
+      email: 'felipe-daros2@hotmail.com',
+      status: 'SUCCESS'
+    },
+    {
+      id: 10,
+      titulo: 'FEFEFEFEFFE TRANSPORTE BIFE',
+      email: 'felipe-daros2@hotmail.com',
+      status: 'SUCCESS'
     }
   ]);
 
@@ -73,7 +91,7 @@ export function Home() {
           />
         ))}
       </ContainerPedidos>
-      <CustomButtom title="Incluir Pedido" />
+      <CustomButtom onClick={handleNavigate} title="Incluir Pedido" />
       <Image src={logo} alt="logo" />
     </Container>
   )

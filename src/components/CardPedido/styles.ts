@@ -6,8 +6,8 @@ export type PropsStatus = {
 }
 
 export const Container = styled.div`
-  width: 350px;
-  max-width: 350px;
+  width: 600px;
+  max-width: 600px;
   height: 60px;
   display: flex;
   flex-direction: row;
@@ -17,6 +17,21 @@ export const Container = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
+
+
+  @media (max-width: 768px) {
+    width: 350px;
+    max-width: 350px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
 `;
 
 export const BollStatus = styled.div<PropsStatus>`

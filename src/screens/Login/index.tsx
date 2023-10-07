@@ -47,6 +47,7 @@ export function Login() {
       <img alt="logo" src={logo} />
       {loading && <LoadingSpinner />}
       <ContainerFields>
+        <CustomLabel title="Código"/>
         <Controller
           control={control}
           rules={{
@@ -64,6 +65,7 @@ export function Login() {
         />
         {errors.login && <span style={{ color: '#FF5F56' }}>Campo obrigatório</span>}
 
+        <CustomLabel title="Senha"/>
         <Controller
           control={control}
           rules={{

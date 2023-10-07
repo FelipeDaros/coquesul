@@ -1,7 +1,9 @@
 import { Label } from "./styles";
 
-type Props = React.HtmlHTMLAttributes<HTMLLabelElement> & {};
+type Props = {
+  title: string;
+}
 
-export function CustomLabel({ ...rest }: Props) {
-  return (<Label {...rest} />)
+export function CustomLabel({ title }: Props) {
+  return (<Label>{title}</Label>)
 }

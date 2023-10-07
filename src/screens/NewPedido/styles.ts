@@ -8,3 +8,9 @@ export const Container = styled.div`
   flex-wrap: wrap;
   height: 100vh; /* Defina a altura do Container como 100% da altura da janela (viewport height) */
 `;
+
+export const ContainerButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+`;

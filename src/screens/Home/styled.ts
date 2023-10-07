@@ -5,18 +5,28 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   height: 100vh; /* Defina a altura do Container como 100% da altura da janela (viewport height) */
 `;
 
 export const ContainerPedidos = styled.div`
-  max-height: 420px;
-  height: 420px;
-  max-width: 400px;
+  max-height: 840px;
+  height: 840px;
+  max-width: 800px;
   margin-top: 10px;
   padding-bottom: 10px;
   padding-top: 10px;
   overflow-y: scroll;
+
+  @media (max-width: 768px) {
+    max-height: 420px;
+    height: 420px;
+    max-width: 400px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    overflow-y: scroll;
+  }
 
   &::-webkit-scrollbar {
     display: none;

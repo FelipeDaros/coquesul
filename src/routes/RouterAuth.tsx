@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { NewPedido } from "../screens/NewPedido";
 import { Home } from "../screens/Home";
 
-export function Router() {
+export function RouterAuth() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />

@@ -1,14 +1,19 @@
-import { ThemeProvider } from 'styled-components'
-import theme from './theme'
-import { Home } from './screens/Home'
-import { Router } from './routes/Router'
+import { RouterAuth } from './routes/RouterAuth'
+import { RouterNoAuth } from './routes/RouterNoAuth'
+
 import { BrowserRouter } from 'react-router-dom'
 
+import { ThemeProvider } from 'styled-components'
+import theme from './theme'
+import { useAuth } from './contexts/AuthContext'
+
 function App() {
+  const {user} = useAuth();
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Router />
+        {!!user ? <RouterNoAuth /> : <RouterAuth />}
       </BrowserRouter>
     </ThemeProvider>
   )
