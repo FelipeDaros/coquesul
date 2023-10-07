@@ -6,8 +6,11 @@ import { CardPedido } from "../../components/CardPedido";
 import { CustomButtom } from "../../components/Button";
 
 import logo from '../../assets/logo.png'
+import { useNavigate } from "react-router-dom";
 
 export function Home() {
+  const navigate = useNavigate();
+  
   const [pedidos, setPedidos] = useState([
     {
       id: 1,
@@ -54,7 +57,7 @@ export function Home() {
   ]);
 
   async function handleNavigate() {
-
+    navigate('new');
   }
 
   return (
