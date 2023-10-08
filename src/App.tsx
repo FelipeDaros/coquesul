@@ -13,7 +13,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        {!!user ? <RouterNoAuth /> : <RouterAuth />}
+        {!user ? <RouterNoAuth /> : <RouterAuth />}
       </BrowserRouter>
     </ThemeProvider>
   )

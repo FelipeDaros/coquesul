@@ -1,8 +1,13 @@
 import { Controller, useForm } from "react-hook-form";
 import { CustomLabel } from "../../components/Label";
 import { CustomSelect } from "../../components/Select";
-import { Container, ContainerButtons } from "./styles";
+import { Container, ContainerButtons, Image } from "./styles";
 import { CustomButtom } from "../../components/Button";
+
+import logo from '../../assets/logo.png'
+
+import { useNavigate } from "react-router-dom";
+
 
 type Props = {
   cliente: string;
@@ -13,12 +18,18 @@ type Props = {
 }
 
 export function NewPedido() {
+  const navigate = useNavigate();
+
   const {
     handleSubmit,
     setValue,
     control,
     formState: { errors },
   } = useForm<Props>();
+
+  function handleGoBack(){
+    navigate('/');
+  }
 
   return (
     <Container>
@@ -98,9 +109,11 @@ export function NewPedido() {
       />
       {errors.quantidade && <span style={{ color: '#FF5F56' }}>Campo obrigatório</span>}
       <ContainerButtons>
-          <CustomButtom style={{marginRight: 10}} title="Voltar"/>
+          <CustomButtom onClick={handleGoBack} style={{marginRight: 10}} title="Voltar"/>
           <CustomButtom style={{marginLeft: 10}} title="Incluir"/>
       </ContainerButtons>
+
+      <Image src={logo} alt="logo" />
     </Container>
   )
 }

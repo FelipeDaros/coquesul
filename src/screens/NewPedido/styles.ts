@@ -14,3 +14,9 @@ export const ContainerButtons = styled.div`
   flex-direction: row;
   margin-top: 20px;
 `;
+
+
+export const Image = styled.img`
+  width: 150px;
+  align-self: center;
+`;
