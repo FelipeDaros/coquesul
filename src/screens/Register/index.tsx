@@ -1,57 +1,77 @@
-import { Container, ContainerFields, Image, TitleRegister } from "./styles";
-import { Controller, useForm } from "react-hook-form";
+import { Container, ContainerFields, Image } from "./styles";
 import { CustomInput } from "../../components/Input";
 import { CustomButtom } from "../../components/Button";
-import logo from "../../assets/logo.png";
 import { CustomLabel } from "../../components/Label";
 import { LoadingSpinner } from "../../components/Loading";
+
+import logo from "../../assets/logo.png";
+
+import { Controller, useForm } from "react-hook-form";
 import { useState } from "react";
 import { api } from "../../config";
 import { AxiosError, AxiosResponse } from "axios";
 import { useNavigate } from "react-router-dom";
 
-import { useAuth } from '../../contexts/AuthContext';
-
-
-
 type Props = {
-  login: string;
+  codigo: string;
   senha: string;
 };
 
-export function Login() {
+export function Register() {
   const navigate = useNavigate();
-  const { signIn } = useAuth();
 
   const {
     handleSubmit,
     setValue,
     control,
+    getValues,
     formState: { errors },
   } = useForm<Props>();
 
   const [loading, setLoading] = useState(false);
+  const [isNotValid, setIsNotvalid] = useState(true);
 
-  async function handleLogin({ login, senha }: Props) {
+  async function handleRegister({ codigo, senha }: Props) {
     try {
       setLoading(true);
-      
-      await signIn(login, senha);
 
-      
+      await api.post<AxiosResponse>(`/PDVUSER/v1`, {
+        PEDIDO: {
+          CODIGO: codigo,
+          SENHA: senha,
+        }
+      });
+      navigate('/');
     } catch (error: AxiosError | any) {
       if (!!error.response) {
-        if (error.response.status === 401) return window.alert('Código ou senha incorretos!');
+        window.alert(error.response.data.messsage);
+        return;
       }
 
+      window.alert(error.message);
       return;
     } finally {
       setLoading(false);
     }
   }
 
-  function handleNavigateRegister() {
-    navigate('register');
+  async function handleValidateCodigo(){
+    
+    if(!getValues('codigo')) return;
+
+    const {data} = await api.get(`/PDVVLUSER/v1/?busca=${getValues('codigo')}`);
+    
+    if(!!data.ValidSenha){
+      setIsNotvalid(true);
+      return window.alert('Usuário já possuí senha na plataforma');
+    }else{
+      setIsNotvalid(false);
+    }
+   
+  }
+
+  function handleBack(){
+    navigate('/');
   }
 
   return (
@@ -59,7 +79,7 @@ export function Login() {
       <Image alt="logo" src={logo} />
       {loading && <LoadingSpinner />}
       <ContainerFields>
-        <CustomLabel title="Código" />
+        <CustomLabel title="Código"/>
         <Controller
           control={control}
           rules={{
@@ -68,16 +88,16 @@ export function Login() {
           render={({ field: { onChange, onBlur, value } }) => (
             <CustomInput
               placeholder="Insira seu código"
-              onBlur={onBlur}
-              onChange={(e) => setValue("login", e.target.value)}
+              onBlur={handleValidateCodigo}
+              onChange={(e) => setValue("codigo", e.target.value)}
               value={value}
             />
           )}
-          name="login"
+          name="codigo"
         />
-        {errors.login && <span style={{ color: '#FF5F56' }}>Campo obrigatório</span>}
+        {errors.codigo && <span style={{ color: '#FF5F56' }}>Campo obrigatório</span>}
 
-        <CustomLabel title="Senha" />
+        <CustomLabel title="Senha"/>
         <Controller
           control={control}
           rules={{
@@ -89,13 +109,15 @@ export function Login() {
               onBlur={onBlur}
               onChange={(e) => setValue("senha", e.target.value)}
               value={value}
+              disabled={isNotValid}
+              style={{ opacity: isNotValid ? 0.4 : 1}}
             />
           )}
           name="senha"
         />
         {errors.senha && <span style={{ color: '#FF5F56' }}>Campo obrigatório</span>}
-        <CustomButtom onClick={handleSubmit(handleLogin)} title="Acessar" />
-        <TitleRegister onClick={handleNavigateRegister}>Não possui uma conta ? Registre-se aqui!</TitleRegister>
+        <CustomButtom disabled={isNotValid} onClick={handleSubmit(handleRegister)} title="Registrar" />
+        <CustomButtom onClick={handleBack} title="Voltar" />
       </ContainerFields>
     </Container>
   );

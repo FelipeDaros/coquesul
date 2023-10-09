@@ -19,10 +19,10 @@ const AuthContextProvider: React.FC = ({ children }: any) => {
   useEffect(() => {
     async function loadStoragedData() {
       const storagedUser = localStorage.getItem("@COQUESUL:user");
-
+      
       if (storagedUser) {
         const userParsed = JSON.parse(storagedUser);
-        api.defaults.headers["Authorization"] = `Bearer ${userParsed.token}`;
+        
         setUser(userParsed);
       }
     }
@@ -35,27 +35,18 @@ const AuthContextProvider: React.FC = ({ children }: any) => {
     setUser(null);
   }
 
-  async function signIn(nome: string, senha: string) {
+  async function signIn(nome: string, senha: string): Promise<void> {
     try {
-      const { data } = await api.post("/auth", {
-        nome,
-        senha,
-      });
-
-      api.defaults.headers["Authorization"] = `Bearer ${data.token}`;
+      const { data } = await api.get(`PDVUSER/v1?busca=${nome}&senha=${senha}`);
 
       if (data) {
-        const user = {
-          ...data
-        };
-
-        localStorage.setItem("@COQUESUL:user", JSON.stringify(user));
+        localStorage.setItem("@COQUESUL:user", JSON.stringify(data.result));
         setUser(data);
       }
 
-      return;
+      return data;
     } catch (error: any) {
-      throw new Error(error);
+      throw error;
     }
   }
 

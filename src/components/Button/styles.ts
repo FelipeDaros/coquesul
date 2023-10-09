@@ -5,10 +5,12 @@ export const Button = styled.button`
   height: 40px;
   margin-top: 30px;
   border-radius: 6px;
-  background-color: ${props => props.theme.COLORS.BLUE};
+  background-color: ${props => props.disabled? props.theme.COLORS.RED : props.theme.COLORS.BLUE};
   color: ${props => props.theme.COLORS.LIGHT};
   border: none;
   cursor: pointer; /* Adicione um cursor ao botão para indicar que é clicável */
+
+  opacity: ${props => props.disabled? 0.4 : 1};
 
   @media (max-width: 768px) {
     width: 120px;

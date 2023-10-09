@@ -11,68 +11,7 @@ import { useNavigate } from "react-router-dom";
 export function Home() {
   const navigate = useNavigate();
   
-  const [pedidos, setPedidos] = useState([
-    {
-      id: 1,
-      titulo: 'PEDIDO TRANSPORTE CARNE',
-      email: 'felipe-daros@hotmail.com',
-      status: 'ERROR'
-    },
-    {
-      id: 2,
-      titulo: 'PEDIDO TRANSPORTE BIFE',
-      email: 'felipe-daros2@hotmail.com',
-      status: 'SUCCESS'
-    },
-    {
-      id: 3,
-      titulo: 'FEFEFEFEFFE TRANSPORTE BIFE',
-      email: 'felipe-daros2@hotmail.com',
-      status: 'SUCCESS'
-    },
-    {
-      id: 4,
-      titulo: 'FEFEFEFEFFE TRANSPORTE BIFE',
-      email: 'felipe-daros2@hotmail.com',
-      status: 'SUCCESS'
-    },
-    {
-      id: 5,
-      titulo: 'FEFEFEFEFFE TRANSPORTE BIFE',
-      email: 'felipe-daros2@hotmail.com',
-      status: 'SUCCESS'
-    },
-    {
-      id: 6,
-      titulo: 'FEFEFEFEFFE TRANSPORTE BIFE',
-      email: 'felipe-daros2@hotmail.com',
-      status: 'SUCCESS'
-    },
-    {
-      id: 7,
-      titulo: 'FEFEFEFEFFE TRANSPORTE BIFE',
-      email: 'felipe-daros2@hotmail.com',
-      status: 'SUCCESS'
-    },
-    {
-      id: 8,
-      titulo: 'FEFEFEFEFFE TRANSPORTE BIFE',
-      email: 'felipe-daros2@hotmail.com',
-      status: 'SUCCESS'
-    },
-    {
-      id: 9,
-      titulo: 'FEFEFEFEFFE TRANSPORTE BIFE',
-      email: 'felipe-daros2@hotmail.com',
-      status: 'SUCCESS'
-    },
-    {
-      id: 10,
-      titulo: 'FEFEFEFEFFE TRANSPORTE BIFE',
-      email: 'felipe-daros2@hotmail.com',
-      status: 'SUCCESS'
-    }
-  ]);
+  const [pedidos, setPedidos] = useState([]);
 
   async function handleNavigate() {
     navigate('new');
@@ -90,6 +29,7 @@ export function Home() {
             email={pedido.email}
           />
         ))}
+        {!pedidos.length && <p>Não há pedidos</p>}
       </ContainerPedidos>
       <CustomButtom onClick={handleNavigate} title="Incluir Pedido" />
       <Image src={logo} alt="logo" />

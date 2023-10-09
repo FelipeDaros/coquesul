@@ -21,16 +21,7 @@ export const ContainerFields = styled.div`
   justify-content: center;
 `;
 
-
 export const Image = styled.img`
   width: 300px;
   align-self: center;
-`;
-
-export const TitleRegister = styled.a`
-  text-decoration: none;
-  font-size: 12px;
-  margin-top: 30px;
-  color: ${props => props.theme.COLORS.BLUE};
-  cursor: pointer;
 `;

@@ -4,8 +4,9 @@ import { Button } from "./styles";
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> &{
   title: string;
+  disabled?: boolean;
 }
 
-export function CustomButtom({ title, ...rest }: Props) {
-  return <Button {...rest}>{title}</Button>;
+export function CustomButtom({ title, disabled = false, ...rest }: Props) {
+  return <Button disabled={disabled} {...rest}>{title}</Button>;
 }
