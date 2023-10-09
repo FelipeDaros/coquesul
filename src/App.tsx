@@ -6,7 +6,7 @@ import theme from './theme'
 
 function App() {
   return (
-    //@ts-ignore
+    //@ts-ignore --
     <AuthContextProvider>
       <ThemeProvider theme={theme}>
         <ContainerRoutes />
