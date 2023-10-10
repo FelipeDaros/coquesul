@@ -89,6 +89,7 @@ export function Login() {
               onBlur={onBlur}
               onChange={(e) => setValue("senha", e.target.value)}
               value={value}
+              type="password"
             />
           )}
           name="senha"
