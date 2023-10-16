@@ -35,7 +35,11 @@ export function Login() {
   async function handleLogin({ login, senha }: Props) {
     try {
       setLoading(true);
-      const { data } = await api.get(`/PDVUSER/v1?busca=${login}&senha=${senha}`);
+      const { data } = await api.get(`/PDVUSER/v1?busca=${login}&senha=${senha}`, {
+        headers: {
+          'Content-Type': 'application/json'
+      }
+      });
 
       if (data) {
         localStorage.setItem("@COQUESUL:user", JSON.stringify(data.result));
