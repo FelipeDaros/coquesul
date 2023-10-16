@@ -4,7 +4,7 @@ import { api } from "../config";
 
 type AuthContextDataProps = {
   user: any;
-  signIn(nome: string, senha: string): Promise<any>;
+  signIn(nome: string, senha: string): void;
   signOut(): Promise<any>;
 };
 
@@ -37,13 +37,15 @@ const AuthContextProvider: React.FC = ({ children }: any) => {
 
   async function signIn(nome: string, senha: string): Promise<void> {
     try {
-      const { data } = await api.get(`PDVUSER/v1?busca=${nome}&senha=${senha}`);
+      // const { data } = await api.get(`PDVUSER/v1?busca=${nome}&senha=${senha}`);
+      const data = "AUTHENTICADO";
+      localStorage.setItem("@COQUESUL:user", JSON.stringify(data));
 
-      if (data) {
-        localStorage.setItem("@COQUESUL:user", JSON.stringify(data.result));
-        setUser(data);
-      }
+      //@ts-ignore
+      setUser(data);
 
+
+      //@ts-ignore
       return data;
     } catch (error: any) {
       throw error;

@@ -9,7 +9,7 @@ export function ContainerRoutes() {
 
   return (
     <BrowserRouter>
-      <RouterAuth />
+      {user ? <RouterAuth /> : <RouterNoAuth />}
     </BrowserRouter>
   )
 }
