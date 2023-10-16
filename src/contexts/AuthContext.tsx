@@ -4,7 +4,7 @@ import { api } from "../config";
 
 type AuthContextDataProps = {
   user: any;
-  signIn(nome: string, senha: string): void;
+  signIn(nome: string, senha: string): Promise<void>;
   signOut(): Promise<any>;
 };
 
@@ -37,21 +37,14 @@ const AuthContextProvider: React.FC = ({ children }: any) => {
 
   async function signIn(nome: string, senha: string): Promise<void> {
     try {
-      // const { data } = await api.get(`/PDVUSER/v1?busca=${nome}&senha=${senha}`);
-      const {body} = await fetch(`http://187.108.193.148:8085/REST/CYSYPV01/PDVUSER/v1?busca=${nome}&senha=${senha}`, {
-        headers: {
-          'Origin': 'https://coquesul.vercel.app/'
-        }
-      });
+      const { data } = await api.get(`/PDVUSER/v1?busca=${nome}&senha=${senha}`);
 
-      if (body) {
-        localStorage.setItem("@COQUESUL:user", JSON.stringify(body));
-        //@ts-ignore
-        setUser(body);
+      if (data) {
+        localStorage.setItem("@COQUESUL:user", JSON.stringify(data.result));
+        setUser(data);
       }
 
-      //@ts-ignore
-      return body;
+      return data;
     } catch (error: any) {
       throw error;
     }

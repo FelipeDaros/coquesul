@@ -35,8 +35,15 @@ export function Login() {
   async function handleLogin({ login, senha }: Props) {
     try {
       setLoading(true);
-      
-      await signIn(login, senha);
+      const { data } = await api.get(`/PDVUSER/v1?busca=${login}&senha=${senha}`);
+
+      if (data) {
+        localStorage.setItem("@COQUESUL:user", JSON.stringify(data.result));
+       
+      }
+
+      return data;
+      // await signIn(login, senha);
 
       
     } catch (error: AxiosError | any) {
