@@ -1,8 +1,8 @@
-import { ThemeProvider } from 'styled-components'
-import { AuthContextProvider, useAuth } from './contexts/AuthContext'
-import { ContainerRoutes } from './routes/ContainerRoutes'
+import { ThemeProvider } from 'styled-components';
+import { AuthContextProvider, useAuth } from './contexts/AuthContext';
+import { ContainerRoutes } from './routes/ContainerRoutes';
 
-import theme from './theme'
+import theme from './theme';
 
 function App() {
   return (
