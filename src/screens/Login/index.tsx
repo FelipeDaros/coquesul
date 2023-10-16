@@ -37,7 +37,7 @@ export function Login() {
       setLoading(true);
       const { data } = await api.get(`/PDVUSER/v1?busca=${login}&senha=${senha}`, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': ['application/json', 'text/json', 'application/json;charset=utf-8'],
       }
       });
 
