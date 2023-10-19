@@ -38,7 +38,7 @@ const AuthContextProvider: React.FC = ({ children }: any) => {
   async function signIn(nome: string, senha: string): Promise<void> {
     try {
       const { data } = await api.get(`/PDVUSER/v1?busca=${nome}&senha=${senha}`);
-
+      console.log(data);
       if (data) {
         localStorage.setItem("@COQUESUL:user", JSON.stringify(data.result));
         setUser(data);

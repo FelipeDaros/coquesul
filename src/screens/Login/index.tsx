@@ -5,9 +5,9 @@ import { CustomButtom } from "../../components/Button";
 import logo from "../../assets/logo.png";
 import { CustomLabel } from "../../components/Label";
 import { LoadingSpinner } from "../../components/Loading";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { api } from "../../config";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { useNavigate } from "react-router-dom";
 
 import { useAuth } from '../../contexts/AuthContext';
@@ -32,16 +32,12 @@ export function Login() {
 
   const [loading, setLoading] = useState(false);
 
-  async function handleLogin({ login, senha }: Props) {
+  async function handleLogin({ login, senha }: Props): Promise<void> {
     try {
       setLoading(true);
-      const { data } = await api.get(`/PDVUSER/v1?busca=${login}&senha=${senha}`, {
-        headers: {
-          'Content-Type': ['application/json', 'text/json', 'application/json;charset=utf-8'],
-      }
-      });
 
-      return data;
+      await signIn(login, senha);
+
     } catch (error: AxiosError | any) {
       if (!!error.response) {
         if (error.response.status === 401) return window.alert('Código ou senha incorretos!');
@@ -56,13 +52,6 @@ export function Login() {
   function handleNavigateRegister() {
     navigate('register');
   }
-
-  async function teste(){
-    const {data} = await axios.get('https://www.google.com.br');
-    console.log(data)
-  }
-
-  useEffect(() => {teste()}, [])
 
   return (
     <Container>
