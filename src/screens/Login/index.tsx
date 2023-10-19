@@ -5,9 +5,9 @@ import { CustomButtom } from "../../components/Button";
 import logo from "../../assets/logo.png";
 import { CustomLabel } from "../../components/Label";
 import { LoadingSpinner } from "../../components/Loading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../config";
-import { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { useNavigate } from "react-router-dom";
 
 import { useAuth } from '../../contexts/AuthContext';
@@ -41,15 +41,7 @@ export function Login() {
       }
       });
 
-      if (data) {
-        localStorage.setItem("@COQUESUL:user", JSON.stringify(data.result));
-       
-      }
-
       return data;
-      // await signIn(login, senha);
-
-      
     } catch (error: AxiosError | any) {
       if (!!error.response) {
         if (error.response.status === 401) return window.alert('Código ou senha incorretos!');
@@ -64,6 +56,13 @@ export function Login() {
   function handleNavigateRegister() {
     navigate('register');
   }
+
+  async function teste(){
+    const {data} = await axios.get('https://www.google.com.br');
+    console.log(data)
+  }
+
+  useEffect(() => {teste()}, [])
 
   return (
     <Container>

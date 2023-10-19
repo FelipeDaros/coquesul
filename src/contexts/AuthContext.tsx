@@ -4,7 +4,7 @@ import { api } from "../config";
 
 type AuthContextDataProps = {
   user: any;
-  signIn(nome: string, senha: string): Promise<void>;
+  signIn(nome: string, senha: string): Promise<any>;
   signOut(): Promise<any>;
 };
 
